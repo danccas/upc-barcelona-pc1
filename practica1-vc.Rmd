@@ -58,6 +58,9 @@ print(hora_mas_frecuente)
 
 4.  bytes
 
+```{=html}
+<!-- -->
+```
 a.  filtrar los txt
 b.  filtrar los .edu sumas los bytes
 
