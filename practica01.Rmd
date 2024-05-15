@@ -1,9 +1,19 @@
 ---
 title: "Practica1"
-author: "cesar"
+author: "Gropu Lima Perù"
 date: "2024-05-15"
 output: html_document
 ---
+
+# Integrantes:
+
+## *Diego Anccas*
+
+## *Cesar Yesquen*
+
+## *Eder Oriendo*
+
+## *Israel Angulo*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -15,7 +25,6 @@ knitr::opts_chunk$set(echo = TRUE)
 library(readr)
 data <- read_table("Z:/data.csv", col_names = FALSE) 
 ```
-
 
 # Pregunta 1: Una vez cargado el Dataset a analizar, comprobando que se cargan las IPs, el Timestamp, la Petición (Tipo, URL y Protocolo), Código de respuesta, y Bytes de reply. 1. Cuales son las dimensiones del dataset cargado (número de filas y columnas) 2. Valor medio de la columna Bytes
 
@@ -45,7 +54,6 @@ print(edu_ips_count)
 
 # Pregunta 3: De todas las peticiones recibidas por el servidor cual es la hora en la que hay mayor volumen de peticiones HTTP de tipo "GET"?
 
-
 ```         
 -   extraer las horas, y obtener solo validas (as. numeric y rango valido)
 
@@ -62,7 +70,6 @@ print(hora_mas_frecuente)
 
 ```
 
-
 # Pregunta 4: De las peticiones hechas por instituciones educativas (.edu), ¿Cuantos bytes en total se han transmitido, en peticiones de descarga de ficheros de texto ".txt"?
 
 <!-- -->
@@ -77,7 +84,6 @@ total_bytes <- sum(solicitudes_edu$X7)
 print(total_bytes)
 ```
 
-
 # Pregunta 5: Si separamos la petición en 3 partes (Tipo, URL, Protocolo), usando str_split y el separador " " (espacio), ¿cuantas peticiones buscan directamente la URL = "/"?
 
 ```{r p5}
@@ -86,7 +92,6 @@ print(peticiones_slash)
 ```
 
 # Pregunta 6: Aprovechando que hemos separado la petición en 3 partes (Tipo, URL, Protocolo) ¿Cuantas peticiones NO tienen como protocolo "HTTP/0.2"?
-
 
 ```{r p6}
 peticiones_no_http_0_2 <- sum(data$X5 != "HTTP/0.2")
