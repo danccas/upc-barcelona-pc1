@@ -4,15 +4,26 @@ author: "Diego Anccas"
 date: "`r Sys.Date()`"
 output: html_document
 ---
+# Data Science
+
+## P1
+
+bvbv b
+
+# Introduccion a R
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, cache = T)
+```
 
 ```{r carga}
 library(readr)
 data <- read_table("Z:/epa-http.csv", col_names = FALSE)
 ```
 
-# Pregunta 1
+## Pregunta 1
 
-```{r p1}
+```{r p1, echo=TRUE}
 nrow(data) 
 ncol(data) 
 mean(data$X6, na.rm = TRUE)
