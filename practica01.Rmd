@@ -11,7 +11,7 @@ output: html_document
 
 ## *Cesar Yesquen*
 
-## *Eder Oriendo*
+## *Eder Oriondo*
 
 ## *Israel Angulo*
 
