@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## cargar Data
 
-```{r}
+```{r carga}
 data <- read_table("C:/Users/cesaryc/Desktop/datascience/data/data.csv",    col_names = FALSE) 
 ```
 
@@ -19,7 +19,7 @@ data <- read_table("C:/Users/cesaryc/Desktop/datascience/data/data.csv",    col_
 
 1.1 Cuales son las dimensiones del dataset cargado (número de filas y columnas)
 
-```{r}
+```{r p1.1}
 dim(data)
 ```
 
@@ -27,26 +27,29 @@ Data completa: 47748 Numero de filas con error: 5 Numero de columnas: 4
 
 1.2 Valor medio de la columna Bytes Calculamos la media con mean
 
-```{r}
+```{r p1.2}
 media_x1 <- mean(data$X7, na.rm = TRUE)
 print(media_x1)
 ```
 
-2.  Ips de .edu
+## 2. De las diferentes IPs de origen accediendo al servidor, ¿cuantas pertenecen a una IP claramente educativa (que contenga ".edu")?
 
 buscar los .edu con la funcion str_detect
 
-```{r}
+```{r p2}
 edu_ips_count <- sum(str_detect(data$X1, "\\.edu"))
 print(edu_ips_count)
 ```
 
-3.  HORA MAS SOLICITADA
-    -   extraer las horas, y obtener solo validas (as. numeric y rango valido)
+## 3.De todas las peticiones recibidas por el servidor cual es la hora en la que hay mayor volumen de peticiones HTTP de tipo "GET"?
 
-    -   convertir a tabla y obtener la mas frecuente con
+```         
+-   extraer las horas, y obtener solo validas (as. numeric y rango valido)
 
-```{r}
+-   convertir a tabla y obtener la mas frecuente con
+```
+
+```{r p3}
 horas <- gsub("^.*:(\\d+)]$", "\\1", data$X2)
 horas_numericas <- as.numeric(horas)
 horas_validas <- horas_numericas[horas_numericas >= 0 & horas_numericas <= 23]
@@ -56,31 +59,30 @@ print(hora_mas_frecuente)
 
 ```
 
-4.  bytes
+## 4.De las peticiones hechas por instituciones educativas (.edu), ¿Cuantos bytes en total se han transmitido, en peticiones de descarga de ficheros de texto ".txt"?
 
-```{=html}
 <!-- -->
-```
+
 a.  filtrar los txt
 b.  filtrar los .edu sumas los bytes
 
-```{r}
+```{r p4}
 solicitudes_txt <- data %>% filter(grepl("\\.txt$", data$X4))
 solicitudes_edu <- solicitudes_txt %>% filter(grepl("\\.edu", solicitudes_txt$X1))
 total_bytes <- sum(solicitudes_edu$X7)
 print(total_bytes)
 ```
 
-5.  peticion al "/" contar las peticiones root
+## 5.Si separamos la petición en 3 partes (Tipo, URL, Protocolo), usando str_split y el separador " " (espacio), ¿cuantas peticiones buscan directamente la URL = "/"?
 
-```{r}
+```{r p5}
 peticiones_slash <- sum(data$X4 == "/")
 print(peticiones_slash)
 ```
 
-6.peticion diferente HTTP/0.2 contar las peticiones diferentes a http/0.2
+## 6.Aprovechando que hemos separado la petición en 3 partes (Tipo, URL, Protocolo)  ¿Cuantas peticiones NO tienen como protocolo "HTTP/0.2"?
 
-```{r}
+```{r p6}
 peticiones_no_http_0_2 <- sum(data$X5 != "HTTP/0.2")
 print(peticiones_no_http_0_2)
 ```
