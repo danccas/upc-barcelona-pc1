@@ -1,0 +1,34 @@
+---
+title: "Pràctica 1"
+author: "Diego Anccas"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+library(readr) data \<- read_table("Z:/epa-http.csv", col_names = FALSE) data
+
+# Pregunta 1
+
+nrow(data) ncol(data) mean(data\$X6, na.rm = TRUE)
+
+# Pregunta 2
+
+sum(grepl("\\.edu", data\$X1))
+
+#P Pregunta 3
+
+grepl("GET", data\$X3)
+
+con_get \<- data[grepl("GET", data\$X3)]
+
+# Pregunta 1: Una vez cargado el Dataset a analizar, comprobando que se cargan las IPs, el Timestamp, la Petición (Tipo, URL y Protocolo), Código de respuesta, y Bytes de reply. 1. Cuales son las dimensiones del dataset cargado (número de filas y columnas) 2. Valor medio de la columna Bytes
+
+# Pregunta 2: De las diferentes IPs de origen accediendo al servidor, ¿cuantas pertenecen a una IP claramente educativa (que contenga ".edu")?
+
+# Pregunta 3: De todas las peticiones recibidas por el servidor cual es la hora en la que hay mayor volumen de peticiones HTTP de tipo "GET"?
+
+# Pregunta 4: De las peticiones hechas por instituciones educativas (.edu), ¿Cuantos bytes en total se han transmitido, en peticiones de descarga de ficheros de texto ".txt"?
+
+# Pregunta 5: Si separamos la petición en 3 partes (Tipo, URL, Protocolo), usando str_split y el separador " " (espacio), ¿cuantas peticiones buscan directamente la URL = "/"?
+
+# Pregunta 6: Aprovechando que hemos separado la petición en 3 partes (Tipo, URL, Protocolo) ¿Cuantas peticiones NO tienen como protocolo "HTTP/0.2"?
