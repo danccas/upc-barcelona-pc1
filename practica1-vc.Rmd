@@ -35,6 +35,7 @@ Data completa: 47748 Numero de filas con error: 5 Numero de columnas: 4
 1.2 Valor medio de la columna Bytes Calculamos la media con mean
 
 ```{r p1.2}
+data$X7 <- as.numeric(data$X7)
 media_x1 <- mean(data$X7, na.rm = TRUE)
 print(media_x1)
 ```
