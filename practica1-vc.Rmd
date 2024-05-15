@@ -9,6 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## librerias
+install.packages("stringr")
+library(stringr)
+install.packages("dplyr")
+library(dplyr)
+
+
 ## cargar Data
 
 ```{r carga}
