@@ -1,0 +1,83 @@
+---
+title: "Practica1"
+author: "cesar"
+date: "2024-05-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## cargar Data
+
+```{r}
+data <- read_table("C:/Users/cesaryc/Desktop/datascience/data/data.csv",    col_names = FALSE) 
+```
+
+## Pregunta 1
+
+1.1 Cuales son las dimensiones del dataset cargado (número de filas y columnas)
+
+```{r}
+dim(data)
+```
+
+Data completa: 47748 Numero de filas con error: 5 Numero de columnas: 4
+
+1.2 Valor medio de la columna Bytes Calculamos la media con mean
+
+```{r}
+media_x1 <- mean(data$X7, na.rm = TRUE)
+print(media_x1)
+```
+
+2.  Ips de .edu
+
+buscar los .edu con la funcion str_detect
+
+```{r}
+edu_ips_count <- sum(str_detect(data$X1, "\\.edu"))
+print(edu_ips_count)
+```
+
+3.  HORA MAS SOLICITADA
+    -   extraer las horas, y obtener solo validas (as. numeric y rango valido)
+
+    -   convertir a tabla y obtener la mas frecuente con
+
+```{r}
+horas <- gsub("^.*:(\\d+)]$", "\\1", data$X2)
+horas_numericas <- as.numeric(horas)
+horas_validas <- horas_numericas[horas_numericas >= 0 & horas_numericas <= 23]
+tabla_frecuencias <- table(horas_validas)
+hora_mas_frecuente <- as.numeric(names(tabla_frecuencias[tabla_frecuencias == max(tabla_frecuencias)]))
+print(hora_mas_frecuente)
+
+```
+
+4.  bytes
+
+a.  filtrar los txt
+b.  filtrar los .edu sumas los bytes
+
+```{r}
+solicitudes_txt <- data %>% filter(grepl("\\.txt$", data$X4))
+solicitudes_edu <- solicitudes_txt %>% filter(grepl("\\.edu", solicitudes_txt$X1))
+total_bytes <- sum(solicitudes_edu$X7)
+print(total_bytes)
+```
+
+5.  peticion al "/" contar las peticiones root
+
+```{r}
+peticiones_slash <- sum(data$X4 == "/")
+print(peticiones_slash)
+```
+
+6.peticion diferente HTTP/0.2 contar las peticiones diferentes a http/0.2
+
+```{r}
+peticiones_no_http_0_2 <- sum(data$X5 != "HTTP/0.2")
+print(peticiones_no_http_0_2)
+```
