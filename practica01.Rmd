@@ -5,11 +5,16 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-library(readr) data \<- read_table("Z:/epa-http.csv", col_names = FALSE) data
+``` {#carga .r}
+library(readr)
+data <- read_table("Z:/epa-http.csv", col_names = FALSE)
+```
 
 # Pregunta 1
 
-nrow(data) ncol(data) mean(data\$X6, na.rm = TRUE)
+``` r
+nrow(data) ncol(data) mean(data$X6, na.rm = TRUE)
+```
 
 # Pregunta 2
 
