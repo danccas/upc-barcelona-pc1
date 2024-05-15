@@ -12,7 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## cargar Data
 
 ```{r carga}
-data <- read_table("C:/Users/cesaryc/Desktop/datascience/data/data.csv",    col_names = FALSE) 
+library(readr)
+data <- read_table("Z:/data.csv", col_names = FALSE) 
 ```
 
 
