@@ -53,7 +53,7 @@ print(edu_ips_count)
 ```
 
 ```{r p3}
-horas <- gsub("^.*:(\\d+)]$", "\\1", data$X2)
+horas <- gsub("^.*:(\\d+):(\\d+):\\d+]$", "\\1", data$X2)
 horas_numericas <- as.numeric(horas)
 horas_validas <- horas_numericas[horas_numericas >= 0 & horas_numericas <= 23]
 tabla_frecuencias <- table(horas_validas)
