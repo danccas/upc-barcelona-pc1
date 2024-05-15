@@ -14,25 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r carga}
 data <- read_table("C:/Users/cesaryc/Desktop/datascience/data/data.csv",    col_names = FALSE) 
 ```
-## Pregunta 1
-
-```{r p1, echo=TRUE}
-nrow(data) 
-ncol(data) 
-mean(data$X6, na.rm = TRUE)
-```
-
-# Pregunta 2
-```{r p2}
-sum(grepl("\\.edu", data$X1))
-```
-
-# Pregunta 3
-
-```{r p3}
-grepl("GET", data$X3)
-con_get <- data[grepl("GET", data$X3),]
-```
 
 
 # Pregunta 1: Una vez cargado el Dataset a analizar, comprobando que se cargan las IPs, el Timestamp, la Petición (Tipo, URL y Protocolo), Código de respuesta, y Bytes de reply. 1. Cuales son las dimensiones del dataset cargado (número de filas y columnas) 2. Valor medio de la columna Bytes
