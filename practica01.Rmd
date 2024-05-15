@@ -1,26 +1,19 @@
 ---
-title: "Pràctica 1"
-author: "Diego Anccas"
-date: "`r Sys.Date()`"
+title: "Practica1"
+author: "cesar"
+date: "2024-05-15"
 output: html_document
 ---
-# Data Science
-
-## P1
-
-bvbv b
-
-# Introduccion a R
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, cache = T)
+knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## cargar Data
 
 ```{r carga}
-library(readr)
-data <- read_table("Z:/epa-http.csv", col_names = FALSE)
+data <- read_table("C:/Users/cesaryc/Desktop/datascience/data/data.csv",    col_names = FALSE) 
 ```
-
 ## Pregunta 1
 
 ```{r p1, echo=TRUE}
