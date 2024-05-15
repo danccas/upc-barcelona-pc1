@@ -19,10 +19,17 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+## librerias
+```{r librerias}
+library(stringr)
+library(dplyr)
+library(readr)
+```
+
 ## cargar Data
 
 ```{r carga}
-library(readr)
 data <- read_table("Z:/data.csv", col_names = FALSE) 
 ```
 
