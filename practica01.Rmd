@@ -1,9 +1,9 @@
----
-title: "Practica1"
-author: "Gropu Lima Perù"
-date: "2024-05-15"
-output: html_document
----
+```{r p00}
+Title: "Practica1"
+Author: "Gropu Lima Perù"
+Date: "2024-05-15"
+Output: html_document
+```
 
 # Integrantes:
 
@@ -19,8 +19,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ## librerias
+
 ```{r librerias}
 library(stringr)
 library(dplyr)
