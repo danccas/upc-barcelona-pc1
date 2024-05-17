@@ -23,7 +23,6 @@ if (status_code(response) == 200) {
   title <- xml_text(title_node)
   
   # Extrae información utilizando rvest
-  #links <- page %>% html_nodes("a") %>% html_attr("href")
   links <- page_xml %>%
     xml_find_all("//a") %>%
     lapply(function(node) {
@@ -36,7 +35,7 @@ if (status_code(response) == 200) {
       } else if (grepl("^/", url)) {
         url <- paste("https://www.mediawiki.org", url, sep = "")
       }
-      # Verificar si la URL es externa
+      # Verificar si la URL es Local
       if (!grepl("^https?://www.mediawiki.org", url)) {
         status <- "Enlace Local"
       } else {
@@ -46,13 +45,11 @@ if (status_code(response) == 200) {
       }
       list(text = text, url = url, status = status)
       
-      
       # Pausa entre peticiones
       # Sys.sleep(2) 
       
     })
   # Convertir la lista de enlaces a un data frame
-  #links_df <- do.call(rbind, links)
   links_df <- do.call(rbind, lapply(links, as.data.frame))
   
   # Agregar la columna 'visto' que cuenta cuántas veces aparece cada enlace
@@ -62,10 +59,10 @@ if (status_code(response) == 200) {
     ungroup()
   
   links_df <- links_df %>%
-    mutate(type = ifelse(grepl("^https?://", url), "Absoluta", "Relativa"))
+    mutate(typeLink = ifelse(grepl("^https?://", url), "Absoluta", "Relativa"))
   
   # Crear el histograma
-  histograma <- ggplot(links_df, aes(x = visto, fill = type)) +
+  histograma <- ggplot(links_df, aes(x = visto, fill = typeLink)) +
     geom_histogram(binwidth = 1, position = "dodge") +
     labs(title = "Frecuencia de Aparición de Enlaces",
          x = "Número de Apariciones",
@@ -73,7 +70,7 @@ if (status_code(response) == 200) {
          fill = "Tipo de URL") +
     theme_minimal()
   
-  links_df <- links_df %>% mutate(type = ifelse(grepl("^https?://www.mediawiki.org", url) | grepl("^/", url), "Interno", "Externo"))
+  links_df <- links_df %>% mutate(type = ifelse(grepl("^https?://www.mediawiki.org", url) | grepl("^/", url) | grepl("^#", url), "Interno", "Externo"))
   
   # Contar la cantidad de cada tipo de URL
   counts <- links_df %>%
@@ -110,7 +107,6 @@ if (status_code(response) == 200) {
   # Unir los gráficos en una sola imagen
   grid.arrange(bar_plot, pie_plot, histograma, nrow = 3)
   
-  #print(links_df)
 } else {
   cat("Error al descargar la página.")
 }
