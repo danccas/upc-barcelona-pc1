@@ -7,21 +7,17 @@ Output: html_document
 
 # Integrantes:
 
-## *Diego Anccas*
-
-## *Cesar Yesquen*
-
-## *Eder Oriondo*
-
-## *Israel Angulo*
+- *Diego Anccas*
+- *Cesar Yesquen*
+- *Eder Oriondo*
+- *Israel Angulo*
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
 ## librerias
-
-```{r librerias}
+```{r librerias, message=FALSE,warning=F}
 library(stringr)
 library(dplyr)
 library(readr)
@@ -30,7 +26,11 @@ library(readr)
 ## cargar Data
 
 ```{r carga}
-data <- read_table("Z:/data.csv", col_names = FALSE) 
+# carga de datos
+data <- read_table("Z:/data.csv", col_names = FALSE)
+
+# cambiamos nombres columnas
+colnames(data) <- c("", "", "", "", "", "", "", "bytes")
 ```
 
 # Pregunta 1: Una vez cargado el Dataset a analizar, comprobando que se cargan las IPs, el Timestamp, la Petición (Tipo, URL y Protocolo), Código de respuesta, y Bytes de reply. 1. Cuales son las dimensiones del dataset cargado (número de filas y columnas) 2. Valor medio de la columna Bytes
@@ -38,15 +38,16 @@ data <- read_table("Z:/data.csv", col_names = FALSE)
 1.1 Cuales son las dimensiones del dataset cargado (número de filas y columnas)
 
 ```{r p1.1}
-dim(data)
+num_filas <- nrow(data)
+num_columnas <- ncol(data)
 ```
 
-Data completa: 47748 Numero de filas con error: 5 Numero de columnas: 4
+EL data frame tiene `r num_filas` filas, y `r num_columnas` columnas. Durante la carga hemos tenido algunos errores con filas que tenian menos columnas de las esperadas.
 
 1.2 Valor medio de la columna Bytes Calculamos la media con mean
 
 ```{r p1.2}
-data$X7 <- as.numeric(data$X7)
+data$X7 <- as.numeric(data$bytes)
 media_x1 <- mean(data$X7, na.rm = TRUE)
 print(media_x1)
 ```
