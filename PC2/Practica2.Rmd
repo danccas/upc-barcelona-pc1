@@ -17,8 +17,6 @@ title <- xpathSApply(parsedXML, '//title', xmlValue)
 
 
 #PREGUNTA 3
-
-
 links <- xpathSApply(parsedXML, "//a", function(link) {
   list(text = xmlValue(link), url = xmlGetAttr(link, "href"))
 })
@@ -41,11 +39,11 @@ verificar_estado <- function(url) {
   return(estado)
 }
 https_links_df <- links_df[grepl("^https://", links_df$URL), ]
-links_df$Estado <- sapply(https_links_df$URL, verificar_estado)
+https_links_df$Estado <- sapply(https_links_df$URL, verificar_estado)
+print(https_links_df)
 
-print(links_df)
 
-
+#PARTE 2
 #PREGUNTA 6
 
 
