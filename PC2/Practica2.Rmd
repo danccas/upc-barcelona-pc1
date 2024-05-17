@@ -3,6 +3,9 @@
 library(httr)
 library(XML)
 library(rvest)
+library(httr)
+library(ggplot2)
+library(gridExtra)
 
 url <- "https://www.mediawiki.org/wiki/MediaWiki"
 
@@ -47,7 +50,41 @@ print(https_links_df)
 #PREGUNTA 6
 
 
+# Crear el histograma Enlaces Absolutas/Relativas
 
+links_df$Tipo <- ifelse(grepl("^https?://", links_df$URL), "Absoluta", "Relativa")
+
+histograma <- ggplot(links_df, aes(x = Tipo)) +
+  geom_histogram(stat = "count", fill = "steelblue", color = "black") +
+  labs(title = "Frecuencia de Enlaces Absolutos y Relativos", x = "Tipo de URL", y = "Frecuencia") +
+  theme_minimal()
+print(histograma)
+
+
+# Identificar enlaces que apuntan dentro de MediaWiki y fuera
+links_df$Destino <- ifelse(grepl("^https://www.mediawiki.org", links_df$URL) | links_df$Tipo == "Relativa", "MediaWiki", "Otros")
+
+barras <- ggplot(links_df, aes(x = Destino)) +
+  geom_bar(fill = "lightgreen", color = "black") +
+  labs(title = "Enlaces apuntando a MediaWiki vs Otros", x = "Destino", y = "Cantidad de Enlaces") +
+  theme_minimal()
+
+print(barras)
+
+
+# Contar la frecuencia de cada status code
+estado_frecuencia <- table(https_links_df$Estado)
+
+estado_df <- as.data.frame(estado_frecuencia)
+colnames(estado_df) <- c("Estado", "Frecuencia")
+
+torta <- ggplot(estado_df, aes(x = "", y = Frecuencia, fill = as.factor(Estado))) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y", start = 0) +
+  labs(title = "Porcentaje de Status de Enlaces", fill = "Estado") +
+  theme_void()
+
+print(torta)
 
 
 
