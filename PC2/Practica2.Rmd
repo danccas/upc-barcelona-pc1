@@ -1,0 +1,55 @@
+
+# Cargar las librerías necesarias
+library(httr)
+library(XML)
+library(rvest)
+
+url <- "https://www.mediawiki.org/wiki/MediaWiki"
+
+#PREGUNTA 1
+response <- GET(url)
+html <- content(response, "text")
+parsedXML <- htmlParse(html, asText = TRUE)
+
+
+#PREGUTA 2
+title <- xpathSApply(parsedXML, '//title', xmlValue)
+
+
+#PREGUNTA 3
+
+
+links <- xpathSApply(parsedXML, "//a", function(link) {
+  list(text = xmlValue(link), url = xmlGetAttr(link, "href"))
+})
+
+links_matriz <- matrix(unlist(links), ncol = 2, byrow = TRUE)
+links_df <- as.data.frame(links_matriz)
+colnames(links_df) <- c("Texto", "URL")
+print(links_df)
+
+#PREGUNTA 4
+nuevo_links_df <- aggregate(Repetidas ~ Texto + URL, data = links_df, FUN = sum)
+nuevo_links_df <- nuevo_links_df[order(-nuevo_links_df$Repetidas), ]
+print(nuevo_links_df)
+
+
+#PREGUNTA 5
+verificar_estado <- function(url) {
+  response <- HEAD(url)
+  estado <- response$status_code
+  return(estado)
+}
+https_links_df <- links_df[grepl("^https://", links_df$URL), ]
+links_df$Estado <- sapply(https_links_df$URL, verificar_estado)
+
+print(links_df)
+
+
+#PREGUNTA 6
+
+
+
+
+
+
