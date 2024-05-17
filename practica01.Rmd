@@ -1,9 +1,9 @@
-```{r p00}
+---
 Title: "Practica1"
 Author: "Gropu Lima Perù"
 Date: "2024-05-15"
 Output: html_document
-```
+---
 
 # Integrantes:
 
@@ -16,7 +16,8 @@ Output: html_document
 knitr::opts_chunk$set(echo = TRUE, warning = F)
 ```
 
-## librerias
+## Librerias
+En este paso vamos a cargar las librerìas requeridas
 ```{r librerias, message=FALSE,warning=F}
 library(stringr)
 library(dplyr)
@@ -30,7 +31,8 @@ library(readr)
 data <- read_table("Z:/data.csv", col_names = FALSE)
 
 # cambiamos nombres columnas
-colnames(data) <- c("", "", "", "", "", "", "", "bytes")
+colnames(data) <- c("IP", "HORA", "METODO", "URL", "VERSION", "STATUS", "BYTES")
+
 ```
 
 # Pregunta 1: Una vez cargado el Dataset a analizar, comprobando que se cargan las IPs, el Timestamp, la Petición (Tipo, URL y Protocolo), Código de respuesta, y Bytes de reply. 1. Cuales son las dimensiones del dataset cargado (número de filas y columnas) 2. Valor medio de la columna Bytes
@@ -47,8 +49,8 @@ EL data frame tiene `r num_filas` filas, y `r num_columnas` columnas. Durante la
 1.2 Valor medio de la columna Bytes Calculamos la media con mean
 
 ```{r p1.2}
-data$X7 <- as.numeric(data$bytes)
-media_x1 <- mean(data$X7, na.rm = TRUE)
+data$X7 <- as.numeric(data$BYTES)
+media_x1 <- mean(data$BYTES, na.rm = TRUE)
 print(media_x1)
 ```
 
@@ -57,7 +59,7 @@ print(media_x1)
 buscar los .edu con la funcion str_detect
 
 ```{r p2}
-edu_ips_count <- sum(str_detect(data$X1, "\\.edu"))
+edu_ips_count <- sum(str_detect(data$IP, "\\.edu"))
 print(edu_ips_count)
 ```
 
@@ -70,7 +72,7 @@ print(edu_ips_count)
 ```
 
 ```{r p3}
-horas <- gsub("^.*:(\\d+):(\\d+):\\d+]$", "\\1", data$X2)
+horas <- gsub("^.*:(\\d+):(\\d+):\\d+]$", "\\1", data$HORA)
 horas_numericas <- as.numeric(horas)
 horas_validas <- horas_numericas[horas_numericas >= 0 & horas_numericas <= 23]
 tabla_frecuencias <- table(horas_validas)
@@ -87,22 +89,22 @@ a.  filtrar los txt
 b.  filtrar los .edu sumas los bytes
 
 ```{r p4}
-solicitudes_txt <- data %>% filter(grepl("\\.txt$", data$X4))
-solicitudes_edu <- solicitudes_txt %>% filter(grepl("\\.edu", solicitudes_txt$X1))
-total_bytes <- sum(solicitudes_edu$X7)
+solicitudes_txt <- data %>% filter(grepl("\\.txt$", data$URL))
+solicitudes_edu <- solicitudes_txt %>% filter(grepl("\\.edu", solicitudes_txt$IP))
+total_bytes <- sum(solicitudes_edu$BYTES)
 print(total_bytes)
 ```
 
 # Pregunta 5: Si separamos la petición en 3 partes (Tipo, URL, Protocolo), usando str_split y el separador " " (espacio), ¿cuantas peticiones buscan directamente la URL = "/"?
 
 ```{r p5}
-peticiones_slash <- sum(data$X4 == "/")
+peticiones_slash <- sum(data$URL == "/")
 print(peticiones_slash)
 ```
 
 # Pregunta 6: Aprovechando que hemos separado la petición en 3 partes (Tipo, URL, Protocolo) ¿Cuantas peticiones NO tienen como protocolo "HTTP/0.2"?
 
 ```{r p6}
-peticiones_no_http_0_2 <- sum(data$X5 != "HTTP/0.2")
+peticiones_no_http_0_2 <- sum(data$STATUS != "HTTP/0.2")
 print(peticiones_no_http_0_2)
 ```
