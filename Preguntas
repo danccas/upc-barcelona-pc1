@@ -1,0 +1,31 @@
+CUESTIONARIO DE PRÀCTICA
+
+1. Dado un registro de vehículos que circulan por una autopista, disponemos de
+su marca y modelo, país de matriculación, y tipo de vehículo (por número de
+ruedas). Con tal de ajustar precios de los peajes, ¿Cuántos vehículos tenemos
+por tipo? ¿Cuál es el tipo más frecuente? ¿De qué países tenemos más
+vehículos?
+Descriptiva
+Esta pregunta busca describir los datos disponibles, proporcionando un resumen de la distribución de los vehículos
+
+2. Dado un registro de visualizaciones de un servicio de video-on-demand, donde
+disponemos de los datos del usuario, de la película seleccionada, fecha de
+visualización y categoría de la película, queremos saber ¿Hay alguna
+preferencia en cuanto a género literario según los usuarios y su rango de edad?
+Exploratoria
+intenta descubrir patrones o relaciones en los datos
+
+3. Dado un registro de peticiones a un sitio web, vemos que las peticiones que
+provienen de una red de telefonía concreta acostumbran a ser incorrectas y
+provocarnos errores de servicio. ¿Podemos determinar si en el futuro, los
+próximos mensajes de esa red seguirán dando problemas? ¿Hemos notado el
+mismo efecto en otras redes de telefonía?
+Predictiva
+La primera pregunta es predictiva, ya que busca predecir futuros problemas. La segunda pregunta es inferencial, ya que busca identificar patrones similares en otras redes.
+
+4. Dado los registros de usuarios de un servicio de compras por internet, los
+usuarios pueden agruparse por preferencias de productos comprados.
+Queremos saber si ¿Es posible que, dado un usuario al azar y según su historial,
+pueda ser directamente asignado a un o diversos grupos?
+Causal
+causal porque busca entender si el historial de un usuario tiene un efecto directo sobre la asignación.
