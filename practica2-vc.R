@@ -5,6 +5,7 @@ library(ggplot2)
 library(dplyr)
 library(gridExtra)
 
+
 # URL de la página a scrapear
 url <- "https://www.mediawiki.org/wiki/MediaWiki"
 
